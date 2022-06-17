@@ -1,6 +1,11 @@
 import React from 'react';
 // 导入样式
 import RouteStyle from '../css/route.less';
+// 使用react路由插件：react-router-dom
+import { Link, Switch, Route } from 'react-router-dom';
+// 导入组件UsingRedux
+import UsingRedux from '../components/redux/UsingRedux.jsx';
+
 /**
  *
  * @ antd ui库的使用：
@@ -71,6 +76,13 @@ export default class Home extends React.Component {
 		return (
 			<div className={RouteStyle.container}>
 				<h3>这是Home组件</h3>
+				<Link to="/home/use_redux">一、Redux在react框架中的使用</Link>
+				<Switch>
+					<Route
+						path="/home/use_redux"
+						component={UsingRedux}
+					></Route>
+				</Switch>
 			</div>
 		);
 	}
