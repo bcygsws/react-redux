@@ -1,0 +1,32 @@
+{
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"modules": false
+			}
+		],
+		"@babel/preset-react" // 解析jsx尖括号语法
+	],
+	"plugins": [
+		[
+			"import", // babel-plugin-import@1.13.0插件表示按需引入antd中的组件
+			{
+				"libraryName": "antd",
+				"libraryDirectory": "lib",
+				"style": "css"
+			}
+		],
+		[
+			"@babel/plugin-transform-runtime",
+			{
+				"corejs": 2, // polyfill 需要使用@babel/runtime-corejs2
+				"useBuildIns": "usage" //按需引入,即使用什么新特性打包什么新特性, 可以减小打包的体积
+			}
+		],
+		// babel-runtime和babel-polyfill的作用介绍和使用 https://www.jianshu.com/p/73ba084795ce
+		["@babel/plugin-proposal-class-properties", { "loose": false }]
+		// @babel/plugin-proposal-class-properties 及 属性的赋值与定义的区别,loose:false，严格模式，直接解析成defineProperty形式
+		// https://blog.csdn.net/youlinhuanyan/article/details/107867162
+	]
+}
