@@ -38,12 +38,12 @@
  */
 // 案例：下拉框选择一个额度，然后点击扣工资、加工资按钮，下面展示实得工资数额(假设工资，初始值为10000)
 import React from 'react';
-import Salary from './Salary.jsx';
+import List from './List.jsx';
 export default class UsingRedux extends React.Component {
 	render() {
 		return (
 			<div>
-				<Salary></Salary>
+				<List></List>
 			</div>
 		);
 	}
