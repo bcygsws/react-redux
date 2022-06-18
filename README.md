@@ -250,8 +250,8 @@ L## 一、项目构建
 -   loader,
 -   loading(){
 -   return <div>加载中……</div>
--                                                          }
--                                                      })
+-                                                                  }
+-                                                              })
 -   }
 
 ### 定义一函数，模拟上面 export default 暴露的函数
@@ -313,5 +313,19 @@ L## 一、项目构建
 -   5.编写 store 函数，从 redux 插件中按需引入 combineReducers、createStore、applyMiddleware;处理异步行为，从 redux-thunk 中引入 thunk;处理调试从@redux-devtools/extension 插件中引入 composeWithDevTools
     -   combineReducers 顾名思义，合并拆分的纯函数
     -   createStore(合并的纯函数 allReducers,配合调试 composeWithDevTools(applyMiddleware(thunk)))
--  6.在main.js文件中，引入store.js文件中导出的store；react-redux插件中另外一个对象Provider包裹App组件，并声明属性store,将状态注入到Provider包裹的组件中
+-   6.在 main.js 文件中，引入 store.js 文件中导出的 store；react-redux 插件中另外一个对象 Provider 包裹 App 组件，并声明属性 store,将状态注入到 Provider 包裹的组件中
 
+### React16.8 以后的版本，推荐使用 redux toolkit （createSlice 和 configureStore 来自于包@redux.js/toolkit）实现组件通信
+
+-   [redux toolkit 傻瓜教学](https://blog.csdn.net/wangyangnuli/article/details/122520675)
+-   1.创建一个 store.js 文件从插件@redux.js/toolkit 中引入 configureStore({
+-   reducer:{
+-   // createSlice 中的 nam 标识符,x
+-   x:listReducer
+-   }
+-   })
+-   2.在 main.js 文件外层嵌入 Provider 组件(在包 react-redux 中)，并导入 store.js 文件，获取 store 属性，作为 Provider 属性注入
+-   3.创建切片，createSlice(来自@redux.js/toolkit 包)；切片对象中需要包含三方面的内容：name 标识符、初始化对象 initState 和命名的 reducers
+-   4.在 views 视图中引入 useDispatch 和 useSelector 特别注意：view 视图是由函数创建的组件，不能是类组件
+-   useDispatch 实例化拿到分发 action 的 dispatch 对象
+-   useSelector 则用于 state 变化时，获取最新的 state 状态，并重新渲染页面
