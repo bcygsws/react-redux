@@ -127,6 +127,7 @@ L## 一、项目构建
 
 -   父组件传递给子组件属性，只有当父组件中传递的这个值变化时，才触发这个钩子，结合 TestReceiveProps.jsx 案例理解
 -   nextProps 中返回的是传递过来的变化后的对象，当前子组件的 this.props 打印的还是传递的旧对象
+
 ### React16 生命周期钩子
 
 #### 关于 componentWillReceiveProps 生命周期钩子的说明
@@ -249,8 +250,8 @@ L## 一、项目构建
 -   loader,
 -   loading(){
 -   return <div>加载中……</div>
--                                      }
--                                  })
+-                                                          }
+-                                                      })
 -   }
 
 ### 定义一函数，模拟上面 export default 暴露的函数
@@ -289,3 +290,28 @@ L## 一、项目构建
 
 -   [react-player 插件，开发小院](http://www.voidcc.com/project/react-player)
 -   [github 官网](https://github.com/cookpete/react-player)
+
+## Redux 从入门到进阶
+
+### 参考文档
+
+-   [文档 1-描述 Redux 流程](https://zhuanlan.zhihu.com/p/398460394)
+-   [Redux Toolkit: 概览](http://cn.redux.js.org/redux-toolkit/overview/)
+
+### React16.8 以前的 Redux 使用流程
+
+-   1.在 jsx 组件中，this.props 中取数据变量，或者方法，它们是 state 和 Dispatch 映射的变量和方法；这种映射的变量方法，分别为 count 和 inc、dec
+-   使用举例：{this.props.count}
+-   使用举例：increment=()=>{
+-   // 可以为映射的方法传入参数
+-   this.props.inc(data)
+-
+-   }
+-   2.从 react-redux 的插件中引入 connect,connect 的目的是将 UI 组件(mapStateToProps 负责输入逻辑，state 一旦变化，就会跟踪这种变化，重新渲染页面)和容器组件（mapDispatchToProps 负责输出逻辑，将 view 视图的操作抽象为 action,并分发这些 action,触发纯函数产生新的 state）连接起来
+-   3.编写 actions 对象和 action 的 type 对象（定义一些常量，代替字符串，避免出错）
+-   4.编写 reducer 纯函数，接收 action 和 state,并产生新的 state
+-   5.编写 store 函数，从 redux 插件中按需引入 combineReducers、createStore、applyMiddleware;处理异步行为，从 redux-thunk 中引入 thunk;处理调试从@redux-devtools/extension 插件中引入 composeWithDevTools
+    -   combineReducers 顾名思义，合并拆分的纯函数
+    -   createStore(合并的纯函数 allReducers,配合调试 composeWithDevTools(applyMiddleware(thunk)))
+-  6.在main.js文件中，引入store.js文件中导出的store；react-redux插件中另外一个对象Provider包裹App组件，并声明属性store,将状态注入到Provider包裹的组件中
+

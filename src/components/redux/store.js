@@ -1,4 +1,5 @@
 // 导入创建store仓库和中间件对象
+// React16.8以后，使用Redux Toolkit,即Redux专门的工具包，@reduxjs/toolkit
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import salaryReducer from './salaryReducer.js';
 // 导入redux调试扩展插件
