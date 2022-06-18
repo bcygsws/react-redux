@@ -5,7 +5,7 @@ import RouteStyle from '../css/route.less';
 import { Link, Switch, Route } from 'react-router-dom';
 // 导入组件UsingRedux
 import UsingRedux from '../components/redux/UsingRedux.jsx';
-
+import UsingReduxToolkit from '../components/redux_toolkit/UsingReduxToolkit.jsx';
 /**
  *
  * @ antd ui库的使用：
@@ -77,11 +77,17 @@ export default class Home extends React.Component {
 			<div className={RouteStyle.container}>
 				<h3>这是Home组件</h3>
 				<Link to="/home/use_redux">一、Redux在react框架中的使用</Link>
-				<Link to="/home/use_redux_toolkit">二、@redux.js/toolkit在react框架中的使用</Link>
+				<Link to="/home/use_redux_toolkit">
+					二、@redux.js/toolkit在react框架中的使用
+				</Link>
 				<Switch>
 					<Route
 						path="/home/use_redux"
 						component={UsingRedux}
+					></Route>
+					<Route
+						path="/home/use_redux_toolkit"
+						component={UsingReduxToolkit}
 					></Route>
 				</Switch>
 			</div>

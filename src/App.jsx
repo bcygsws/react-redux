@@ -2,8 +2,11 @@ import React from 'react';
 // 导入react-router相关的包，web中使用react-router-dom,可以根据是开发web还是App，选择安装不同的包
 // 按需导出常用的三个
 import { HashRouter, Route, NavLink, Switch, Redirect } from 'react-router-dom';
-// 导入仓库store文件，为注入数据做准备
-import store from './components//redux/store.js';
+// Salary组件-导入仓库store文件，为注入数据做准备
+// import store from './components/redux/store.js';
+
+// List组件
+import store from './components/redux_toolkit/store.js';
 // 注入状态需要的Provider
 import { Provider } from 'react-redux';
 import AppStyle from './css/app.less';
