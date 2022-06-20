@@ -4,18 +4,19 @@
  *
  */
 import { INC, DEC } from './constant.js';
-const preState={
-  val:0
-}
+const preState = {
+	val: 0
+};
 const counterReducer = (state = preState, action) => {
 	const { type, step } = action;
-	switch (type) {
-		case INC:
-			return state.val + step;
-		case DEC:
-			return state.val - step;
-		default:
-			return state.val;
+	if (type === INC) {
+		state.val += step;
+		return state;
+	} else if (type === DEC) {
+		state.val -= step;
+		return state;
+	} else {
+		return state;
 	}
 };
 export default counterReducer;
