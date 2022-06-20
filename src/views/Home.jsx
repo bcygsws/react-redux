@@ -6,6 +6,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 // 导入组件UsingRedux
 import UsingRedux from '../components/redux/UsingRedux.jsx';
 import UsingReduxToolkit from '../components/redux_toolkit/UsingReduxToolkit.jsx';
+import OnlyRedux from '../components/only_redux/OnlyRedux.jsx';
 /**
  *
  * @ antd ui库的使用：
@@ -80,6 +81,7 @@ export default class Home extends React.Component {
 				<Link to="/home/use_redux_toolkit">
 					二、@redux.js/toolkit在react框架中的使用
 				</Link>
+				<Link to="/home/only_redux">三、单独使用redux实现组件通信</Link>
 				<Switch>
 					<Route
 						path="/home/use_redux"
@@ -88,6 +90,10 @@ export default class Home extends React.Component {
 					<Route
 						path="/home/use_redux_toolkit"
 						component={UsingReduxToolkit}
+					></Route>
+					<Route
+						path="/home/only_redux"
+						component={OnlyRedux}
 					></Route>
 				</Switch>
 			</div>
