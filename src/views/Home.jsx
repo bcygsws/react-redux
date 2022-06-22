@@ -1,8 +1,8 @@
 import React from 'react';
-// 导入样式
-import RouteStyle from '../css/route.less';
 // 使用react路由插件：react-router-dom
 import { Link, Switch, Route } from 'react-router-dom';
+// 导入路由样式
+import RouteStyle from '../css/route.less';
 // 导入组件UsingRedux
 import UsingRedux from '../components/redux/UsingRedux.jsx';
 import UsingReduxToolkit from '../components/redux_toolkit/UsingReduxToolkit.jsx';

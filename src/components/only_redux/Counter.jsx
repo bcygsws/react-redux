@@ -55,7 +55,9 @@ export default class Counter extends React.Component {
 				<h3>Redux单独实现通信</h3>
 				<button onClick={this.increment}>count值+2</button>
 				<button onClick={this.decrement}>count值-2</button>
-				<p>当前value值：{this.state.val}</p>
+				<p>当前value值：{this.state.count.val}</p>
+				<hr/>
+				<p>下面一个组价数据源-数组的长度是：{this.state.list.length}</p>
 			</div>
 		);
 	}

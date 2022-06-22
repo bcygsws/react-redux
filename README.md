@@ -250,8 +250,8 @@ L## 一、项目构建
 -   loader,
 -   loading(){
 -   return <div>加载中……</div>
--                                                                  }
--                                                              })
+-                                                                            }
+-                                                                        })
 -   }
 
 ### 定义一函数，模拟上面 export default 暴露的函数
@@ -329,3 +329,28 @@ L## 一、项目构建
 -   4.在 views 视图中引入 useDispatch 和 useSelector 特别注意：view 视图是由函数创建的组件，不能是类组件
 -   useDispatch 实例化拿到分发 action 的 dispatch 对象
 -   useSelector 则用于 state 变化时，获取最新的 state 状态，并重新渲染页面
+
+### Redux 单独实现组件通信
+
+-   [redux 单独实现组件通信](https://blog.csdn.net/qq_44722915/article/details/109642054)
+
+#### 实现通信的操作步骤：
+
+-   1.同 react-redux 一样，需要创建 store.js 文件和 reducer.js 文件；store.js 文件导出 store 仓库
+-   const store=createStore(allReducers);
+-   const allReducers=combineReducers({
+-   a: aReducer,
+-   b: bReducer
+-   });
+-   a 和 b 分别对应 state 中的变量，在 view 视图中，展开得到的状态对象 this.state={...store.getState(),inputTxt:''};
+-   通过 chrome 的 component 组件调试工具看到，reducer 的键 a 和 b 对应，组件的私有数据中 this.state 的键
+-   ...this.state={
+-   a：数据格式和 preState 格式一致
+-   b: 数据格式和 preState 格式一致
+-   }
+-   2.书写生命周期钩子 componentDidMount(){
+-   store.subscribe(()=>{// subscribe 函数在组件第一次渲染时启动，实时监听 store 仓库中 state 的变化;state 一旦变化，就- // 执行 subscribe 里的回调函数，this.setState 用以更新页面
+-   this.setState(store.getState());
+-   })
+-   }
+-   3.this.state.a 或者 this.state.b 取数据，渲染到 view 视图中；如果 a、b 是对象或数组，数据则要深入到 a 和 b 的内部
