@@ -12,7 +12,7 @@ export default function List() {
 	// 		list: listReducer
 	// 	}
 	// });
-	const count = useSelector((state) => state.matic.value);
+	const { val, list } = useSelector((state) => state.matic);
 	return (
 		<div>
 			<h4>这是List列表子组件</h4>
@@ -20,14 +20,14 @@ export default function List() {
 			<button onClick={() => dispatch(increment({ step: 1 }))}>
 				value值+1
 			</button>
-			<button onClick={() => dispatch(decrement())}>
-				value值-1
-			</button>
-			<button onClick={()=>dispatch(asyncIncrement({ step: 1 }))}>
+			<button onClick={() => dispatch(decrement())}>value值-1</button>
+			<button onClick={() => dispatch(asyncIncrement({ step: 1 }))}>
 				value值异步+1
 			</button>
 			{/* 渲染count值 */}
-			<p>{count}</p>
+			<p>{val}</p>
+			<p>下面一个组件的数据长度：{list.length}</p>
+			<hr/>
 		</div>
 	);
 }

@@ -15,7 +15,15 @@
  */
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
-	value: 0
+	val: 0,
+	msg: '',
+	list: [
+		{
+			id: 1,
+			name: '乔峰',
+			content: '胡汉恩仇，英雄末路'
+		}
+	]
 };
 const ListSlice = createSlice({
 	// 切片名称
@@ -28,15 +36,24 @@ const ListSlice = createSlice({
 			// Redux Toolkit允许使用我们在reducers中直接改写state的逻辑
 			// 由于实现了Immer库，并没有真正改变state
 			// 而是监测到"草稿state"的更给，并根据这些更改生成一个全新的不可变state
-			state.value += payload.step;
+			state.val += payload.step;
 		},
 		decrement: (state) => {
-			state.value -= 1;
+			state.val -= 1;
+		},
+		addItem: (state, { payload }) => {
+			state.msg = payload.val;
+		},
+		// 添加评论
+		addComments: (state, { payload }) => {
+			state.list = [payload, ...state.list];
+			// 表示刚添加了一条数据，之后清空文本域
+			state.msg=""
 		}
 	}
 });
 // redux方法每一个case生成一个Action
-export const { increment, decrement } = ListSlice.actions;
+export const { increment, decrement, addItem,addComments } = ListSlice.actions;
 // export const asyncIncrement = (payload) => (dispatch) => {
 // 	setTimeout(() => {
 // 		dispatch(increment(payload));
