@@ -14,6 +14,7 @@
  *
  */
 import { createSlice } from '@reduxjs/toolkit';
+// 引入axios
 const initialState = {
 	val: 0,
 	msg: '',
@@ -25,12 +26,21 @@ const initialState = {
 		}
 	]
 };
+
 const ListSlice = createSlice({
 	// 切片名称
 	name: 'matic',
 	// 初始值
 	initialState,
 	// 自动生成切片reducer
+	/**
+	 *
+	 * reducer有两个参数
+	 * state,action
+	 * 1.action是一个对象，有type和payload两个键，将payload解构出来
+	 * 2.action={type:'increment',payload:{}},type不需要时，直接解构出参数payload，{payload}
+	 *
+	 */
 	reducers: {
 		increment: (state, { payload }) => {
 			// Redux Toolkit允许使用我们在reducers中直接改写state的逻辑
@@ -48,12 +58,13 @@ const ListSlice = createSlice({
 		addComments: (state, { payload }) => {
 			state.list = [payload, ...state.list];
 			// 表示刚添加了一条数据，之后清空文本域
-			state.msg=""
+			state.msg = '';
 		}
 	}
 });
+
 // redux方法每一个case生成一个Action
-export const { increment, decrement, addItem,addComments } = ListSlice.actions;
+export const { increment, decrement, addItem, addComments } = ListSlice.actions;
 // export const asyncIncrement = (payload) => (dispatch) => {
 // 	setTimeout(() => {
 // 		dispatch(increment(payload));

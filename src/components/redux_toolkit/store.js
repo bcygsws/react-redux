@@ -7,6 +7,7 @@
  */
 import { configureStore } from '@reduxjs/toolkit';
 import listReducer from './ListSlice.js';
+import movieReducer from './MovieSlice.js';
 // 有多个reducer，需要先合并
 // const allReducers=combineReducers({
 // 	// 切片createSlice的name标识符
@@ -16,7 +17,8 @@ import listReducer from './ListSlice.js';
 const store = configureStore({
 	reducer: {
 		// 合并多个slice
-		matic: listReducer
+		matic: listReducer,
+		movie: movieReducer
 	}
 });
 export default store;

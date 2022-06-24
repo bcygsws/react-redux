@@ -9,10 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 // 导入文本框的slice切片文件
 import { addItem, addComments } from './ListSlice.js';
 import sty from '../../css/comment.less';
+import { getMovieData } from './MovieSlice.js';
 export default function Comment() {
-	const { msg, list, val } = useSelector((state) => state.matic);
+	const { msg, list, val } = useSelector((store) => store.matic);
+	const { ls } = useSelector((store) => store.movie);
 	const dispatch = useDispatch();
-	let nameRef, txtRef;
+	let txtRef;
 	const handleChange = (e) => {
 		// 为了阻止React内部重置e.target的值，e调用一下persist()方法，React17中没有persist这个方法了
 		e.persist();
@@ -32,6 +34,10 @@ export default function Comment() {
 		// 清空文本框和文本域
 		txtRef.value = '';
 	};
+	// 点击按钮，获取列表
+const handleAsync=()=>{
+	dispatch(getMovieData());
+}
 	return (
 		<div className={sty.c_container}>
 			{/* 上面一个组件的val值 */}
@@ -60,6 +66,14 @@ export default function Comment() {
 							{item.name}---{item.content}
 						</li>
 					);
+				})}
+			</ul>
+			<button onCLick={handleAsync}>
+				点击安妮，获取电影列表
+			</button>
+			<ul>
+				{ls.map((item) => {
+					return <li key={item.tvId}>{item.description}</li>;
 				})}
 			</ul>
 		</div>
