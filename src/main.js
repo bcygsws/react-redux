@@ -5,6 +5,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
+import store from './components/redux_toolkit/store.js';
+import { Provider } from 'react-redux';
 // 导入Redux相关的
 // 引入子组件DivCom,子组件必须暴露一个接口
 // import DivCom from './components/DivCom.jsx';
@@ -256,4 +258,10 @@ import App from './App.jsx';
 // const store = createStore();
 // 把Hello2组件也单独抽离出去
 // ...person中用到扩展符，表示属性扩散，
-ReactDOM.render(<App></App>, document.getElementById('app'));
+// ReactDOM.render(<App></App>, document.getElementById('app'));
+ReactDOM.render(
+	<Provider store={store}>
+		<App></App>
+	</Provider>,
+	document.getElementById('app')
+);
