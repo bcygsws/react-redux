@@ -4,17 +4,18 @@
  *
  *
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // 导入文本框的slice切片文件
-import { addItem, addComments } from './ListSlice.js';
+import { addItem, addComments, getMovieData } from './ListSlice.js';
 import sty from '../../css/comment.less';
-import { getMovieData } from './MovieSlice.js';
+// import { getMovieData } from './MovieSlice.js';
 export default function Comment() {
-	const { msg, list, val } = useSelector((store) => store.matic);
-	const { ls } = useSelector((store) => store.movie);
+	const { msg, list, val, ls } = useSelector((state) => state.matic);
+	// const { ls } = useSelector((state) => state.mov);
 	const dispatch = useDispatch();
 	let txtRef;
+	let nameRef;
 	const handleChange = (e) => {
 		// 为了阻止React内部重置e.target的值，e调用一下persist()方法，React17中没有persist这个方法了
 		e.persist();
@@ -22,6 +23,10 @@ export default function Comment() {
 		// 实时dispatch文本框数据
 		dispatch(addItem({ val: e.target.value }));
 	};
+	// 页面一进来就加载数据
+	useEffect(() => {
+		dispatch(getMovieData());
+	}, []);
 	const cmtBtn = () => {
 		// 提交按钮
 		dispatch(
@@ -35,9 +40,9 @@ export default function Comment() {
 		txtRef.value = '';
 	};
 	// 点击按钮，获取列表
-const handleAsync=()=>{
-	dispatch(getMovieData());
-}
+	const handleAsync = () => {
+		dispatch(getMovieData());
+	};
 	return (
 		<div className={sty.c_container}>
 			{/* 上面一个组件的val值 */}
@@ -68,9 +73,7 @@ const handleAsync=()=>{
 					);
 				})}
 			</ul>
-			<button onCLick={handleAsync}>
-				点击安妮，获取电影列表
-			</button>
+			<button onClick={handleAsync}>点击安妮，获取电影列表</button>
 			<ul>
 				{ls.map((item) => {
 					return <li key={item.tvId}>{item.description}</li>;
