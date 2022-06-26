@@ -8,8 +8,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // 导入文本框的slice切片文件
 import { addItem, addComments, getMovieData } from './ListSlice.js';
-import sty from '../../css/comment.less';
-// import { getMovieData } from './MovieSlice.js';
+import ComStyle from '../../css/textarea.less';
 export default function Comment() {
 	const { msg, list, val, ls, loading } = useSelector((state) => state.matic);
 	// const { ls } = useSelector((state) => state.mov);
@@ -67,7 +66,7 @@ export default function Comment() {
 		}
 	};
 	return (
-		<div className={sty.c_container}>
+		<div className={ComStyle.c_container}>
 			{/* 上面一个组件的val值 */}
 			<hr />
 			<div>上面一个组件的val值：{val}</div>
@@ -81,7 +80,6 @@ export default function Comment() {
 			/>
 			<br />
 			<textarea
-				className={sty.area}
 				ref={(ele) => (txtRef = ele)}
 			></textarea>
 			<br />
