@@ -36,10 +36,19 @@ export const getMovieData = createAsyncThunk('mov/getMovieData', async () => {
 	const res = await axios.get(
 		'https://pcw-api.iqiyi.com/search/recommend/list?channel_id=1&data_type=1&mode=24&page_id=1&ret_num=48'
 	);
-	// 返回的data是postman工具请求的返回值，直接当做extraReducers中的action
 	if (res.status !== 200) {
 		console.log(new Error('请求数据失败~'));
 	}
+	// 特别注意：解构的data是postman工具请求的返回值，直接当做extraReducers中的action
+	// axios请求回来的数据res，数据格式：
+	/* 
+	{
+			config:{},
+			data:[],  // 将postman接口调试工具请求的返回值，放到了data键下，所有需要解构：const {data}=res;才算是拿到了返回对象
+			status:200
+
+	}
+	*/
 	const { data } = res;
 	return data;
 });
@@ -75,12 +84,12 @@ const ListSlice = createSlice({
 			state.list = [payload, ...state.list];
 			// 表示刚添加了一条数据，之后清空文本域
 			state.msg = '';
-		},
-		loadDataEnd(state, { payload }) {
-			const { data } = payload;
-			state.loading = false;
-			state.ls = data.list;
 		}
+		// loadDataEnd(state, { payload }) {
+		// 	const { data } = payload;
+		// 	state.loading = false;
+		// 	state.ls = data.list;
+		// }
 	},
 	extraReducers: {
 		// payload来自于异步createAsyncThunk中定义的异步actions
@@ -106,8 +115,8 @@ const ListSlice = createSlice({
 });
 
 // redux方法每一个case生成一个Action
-export const { increment, decrement, addItem, addComments, loadDataEnd } =
-	ListSlice.actions;
+// export const { increment, decrement, addItem, addComments, loadDataEnd } =ListSlice.actions;
+export const { increment, decrement, addItem, addComments } = ListSlice.actions;
 // export const asyncIncrement = (payload) => (dispatch) => {
 // 	setTimeout(() => {
 // 		dispatch(increment(payload));
