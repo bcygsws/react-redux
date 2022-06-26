@@ -11,7 +11,7 @@ import { addItem, addComments, getMovieData } from './ListSlice.js';
 import sty from '../../css/comment.less';
 // import { getMovieData } from './MovieSlice.js';
 export default function Comment() {
-	const { msg, list, val, ls } = useSelector((state) => state.matic);
+	const { msg, list, val, ls, loading } = useSelector((state) => state.matic);
 	// const { ls } = useSelector((state) => state.mov);
 	const dispatch = useDispatch();
 	let txtRef;
@@ -42,6 +42,29 @@ export default function Comment() {
 	// 点击按钮，获取列表
 	const handleAsync = () => {
 		dispatch(getMovieData());
+	};
+	// 定义一个方法，切换页面状态
+	// 类比：在vue3中有一个新组件，Suspense来为异步加载提供后备内容
+	const switchView = () => {
+		if (loading) {
+			return (
+				<div>
+					<span>加载中……</span>
+				</div>
+			);
+		} else {
+			return (
+				<ul>
+					{ls.map((item) => {
+						return (
+							<li key={item.tvId}>
+								《{item.title}》/{item.score}/{item.description}
+							</li>
+						);
+					})}
+				</ul>
+			);
+		}
 	};
 	return (
 		<div className={sty.c_container}>
@@ -74,11 +97,7 @@ export default function Comment() {
 				})}
 			</ul>
 			<button onClick={handleAsync}>点击安妮，获取电影列表</button>
-			<ul>
-				{ls.map((item) => {
-					return <li key={item.tvId}>{item.description}</li>;
-				})}
-			</ul>
+			{switchView()}
 		</div>
 	);
 }

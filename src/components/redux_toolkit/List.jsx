@@ -12,7 +12,7 @@ export default function List() {
 	// 		list: listReducer
 	// 	}
 	// });
-	const { val, list } = useSelector((state) => state.matic);
+	const { val, list, ls } = useSelector((state) => state.matic);
 	return (
 		<div>
 			<h4>这是List列表子组件</h4>
@@ -27,7 +27,9 @@ export default function List() {
 			{/* 渲染count值 */}
 			<p>{val}</p>
 			<p>下面一个组件的数据长度：{list.length}</p>
-			<hr/>
+			<hr />
+			<p>电影列表数据长度：{ls.length}</p>
+			<hr />
 		</div>
 	);
 }
