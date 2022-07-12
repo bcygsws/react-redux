@@ -73,6 +73,7 @@ export default class Home extends React.Component {
 			info: '这是向Hello2子组件传递的数据'
 		};
 	}
+	// 演练redux的三种实现通信的方式
 	render() {
 		return (
 			<div className={RouteStyle.container}>
