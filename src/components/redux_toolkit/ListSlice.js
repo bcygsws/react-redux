@@ -64,6 +64,21 @@ const ListSlice = createSlice({
 	 * state,action
 	 * 1.action是一个对象，有type和payload两个键，将payload解构出来
 	 * 2.action={type:'increment',payload:{}},type不需要时，直接解构出参数payload，{payload}
+	 * 数据接口请求的数据：createAsyncThunk 中return返回的data,以及extraReducers中的payload
+	 * {
+   * "code": "A00000",
+   * "data": {
+   *    "card_type": "catelib_video",
+   *    "pingback": {
+   *        "bkt": "lt02,rr04,rc01,rr22,rr13,mr02,greeting_rank3_b,greeting_recall2_d,greeting_recall3_c,greeting_rank1_b,greeting_rank2_a,greeting_rank4_a,list_online",
+   *        "e": "087d982cfd21d0ba0986d6556d4116d5"
+   *    },
+   *    "session": "087d982cfd21d0ba0986d6556d4116d5",
+   *    "has_next": 1,
+   *    "list": []
+	 * 	}
+	 * }
+	 * 
 	 *
 	 */
 	reducers: {
