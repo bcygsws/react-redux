@@ -5,8 +5,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
-import store from './components/redux_toolkit/store.js';
-import { Provider } from 'react-redux';
+
+// 方式2：redux_toolkit实现组件通信
+// import store from './components/redux_toolkit/store.js';
+// import { Provider } from 'react-redux';
+// 方式3:only_redux文件内，只使用redux实现组件状态的集中式管理
+import store from './components/only_redux/store.js';
+
 // 导入Redux相关的
 // 引入子组件DivCom,子组件必须暴露一个接口
 // import DivCom from './components/DivCom.jsx';
@@ -259,9 +264,14 @@ import { Provider } from 'react-redux';
 // 把Hello2组件也单独抽离出去
 // ...person中用到扩展符，表示属性扩散，
 // ReactDOM.render(<App></App>, document.getElementById('app'));
-ReactDOM.render(
-	<Provider store={store}>
-		<App></App>
-	</Provider>,
-	document.getElementById('app')
-);
+
+// 方式1和方式2通用Provider
+// ReactDOM.render(
+// 	<Provider store={store}>
+// 		<App></App>
+// 	</Provider>,
+// 	document.getElementById('app')
+// );
+
+// 方式3:only-redux实现组件通信
+ReactDOM.render(<App store={store}></App>, document.getElementById('app'));
