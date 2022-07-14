@@ -6,6 +6,12 @@
  * 2.callback是state变化前后要执行的操作，这里是this.setState()更新state中val值，来更新页面
  *
  * 参考文档：https://blog.csdn.net/qq_44722915/article/details/109642054
+ * 
+ * 评价
+ * 优点：只使用redux包
+ * 缺点：
+ * 1.需要将store.getState解构后，挂载在state上（有私有数据，必然是类组件）
+ * 2.在componentDidMount中书写this.subscribe(cb)，cb中需要使用this.setState来手动更新页面
  *
  *
  */
