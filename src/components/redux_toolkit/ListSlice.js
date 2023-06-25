@@ -1,6 +1,7 @@
 /**
  *
- * @ slice切片
+ * @ 方式一：在slice文件中请求后端数据
+ * slice切片
  * 1. slice 需要一个name标识符 + 初始化state值 + reducer来控制state如何变化
  * 2. 一旦slice创建完成，就可以导出Redux action creators 和reducer方法
  *
@@ -10,6 +11,7 @@
  * 参考文档：https://blog.csdn.net/youhebuke225/article/details/124940710?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-124940710-blog-119720636.pc_relevant_paycolumn_v3&spm=1001.2101.3001.4242.1&utm_relevant_index=3
  * 参考文档2：https://blog.csdn.net/qq_23539691/article/details/119720636?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-119720636-blog-113787326.pc_relevant_downloadblacklistv1&spm=1001.2101.3001.4242.3&utm_relevant_index=7
  * 参考文档3：https://zhuanlan.zhihu.com/p/382487951
+ * 参考文档4：https://www.5axxw.com/questions/content/39bcn8
  *
  *
  */
@@ -107,20 +109,48 @@ const ListSlice = createSlice({
 		// }
 	},
 	extraReducers: {
-		// payload来自于异步createAsyncThunk中定义的异步actions
-		[getMovieData.fulfilled.type]: (state, { payload }) => {
+		// payload来自于异步createAsyncThunk中定义的异步action的返回值
+		/**
+		 * 两种写法：
+		 * 1.extraReducers中处理其他处或异步定义的actions时，键名两种写法：
+		 * a.[getMovieData.fulfilled.type]  和reducers中保持一致，直接拿type名称
+		 * b.或者直接简写为：
+		 * [getMovieData.fulfilled]
+		 *
+		 *
+		 */
+
+		// [getMovieData.fulfilled.type]: (state, { payload }) => {
+		// 	const { data } = payload;
+		// 	// 获取数据成功
+		// 	console.log('fulfilled~', payload);
+		// 	state.loading = false;
+		// 	state.ls = data.list;
+		// },
+		// [getMovieData.pending.type]: (state) => {
+		// 	// 获取数据进行中
+		// 	console.log('进行中~');
+		// 	state.loading = true;
+		// },
+		// [getMovieData.rejected.type]: (state, err) => {
+		// 	// 获取数据失败
+		// 	console.log('rejected~', err);
+		// 	state.loading = false;
+		// 	state.err = '请求错误';
+		// }
+		[getMovieData.fulfilled]: (state, { payload }) => {
 			const { data } = payload;
 			// 获取数据成功
 			console.log('fulfilled~', payload);
 			state.loading = false;
 			state.ls = data.list;
 		},
-		[getMovieData.pending.type]: (state) => {
+		[getMovieData.pending]: (state) => {
 			// 获取数据进行中
 			console.log('进行中~');
 			state.loading = true;
 		},
-		[getMovieData.rejected.type]: (state, err) => {
+		[getMovieData.rejected]: (state, err) => {
 			// 获取数据失败
 			console.log('rejected~', err);
 			state.loading = false;
